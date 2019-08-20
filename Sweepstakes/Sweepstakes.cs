@@ -17,7 +17,7 @@ namespace Sweepstakes
         //methods
         public void RegisterContestant()
         {
-            UserInterface.GetContestantInformation(contestant, this);
+            UserInterface.GetContestantInformation(this);
             contestants.Add(contestant.idNumber, "" + contestant.firstName + " " + contestant.lastName + "");
 
         }
@@ -31,7 +31,7 @@ namespace Sweepstakes
             foreach (KeyValuePair<int, string> contestant in contestants)
             {
                 if (contestant.Key == winner)
-                    Console.WriteLine($"Contestant ID: {contestant.Key} Contestant Name: {contestant.Value} Contestant Email {contestant.emailAddress}");
+                    Console.WriteLine($"Contestant ID: {contestant.Key} Contestant Name: {contestant.Value} Contestant Email: {contestants[winner]}");
             }
         }
     }
