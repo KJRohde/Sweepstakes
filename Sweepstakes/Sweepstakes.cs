@@ -6,19 +6,25 @@ using System.Threading.Tasks;
 
 namespace Sweepstakes
 {
-    class Sweepstakes
+    public class Sweepstakes
     {
         //memebr variables
         public Dictionary<int, string> contestants = new Dictionary<int, string>();
-        public Contestant contestant;
         public int winner;
-        //construct
+        public Contestant contestant;
 
-        //methods
-        public void RegisterContestant()
+        //construct
+        public Sweepstakes(string name)
         {
-            UserInterface.GetContestantInformation(this);
+        }
+        //methods
+        public void RegisterContestant(Contestant contestant)
+        {
+            UserInterface.GetContestantInformation(contestant);
+            contestant.idNumber = (contestants.Count + 1);
+            Console.WriteLine("Your contest ID number is " + contestant.idNumber + ".");
             contestants.Add(contestant.idNumber, "" + contestant.firstName + " " + contestant.lastName + "");
+
 
         }
         public int ChooseWinner()
@@ -31,7 +37,8 @@ namespace Sweepstakes
             foreach (KeyValuePair<int, string> contestant in contestants)
             {
                 if (contestant.Key == winner)
-                    Console.WriteLine($"Contestant ID: {contestant.Key} Contestant Name: {contestant.Value} Contestant Email: {contestants[winner]}");
+                    Console.WriteLine($"Contestant ID: {contestant.Key} Contestant Name: {contestant.Value} Contestant Email: {contestants[winner]}\nIs the winner.");
+                    Console.ReadLine();
             }
         }
     }

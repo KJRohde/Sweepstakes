@@ -8,27 +8,25 @@ namespace Sweepstakes
 {
     class SweepstakeManagerFactory
     {
-        SweepstakesStackManager stackManager = new SweepstakesStackManager();
-        SweepstakesQueueManager queueManager = new SweepstakesQueueManager();
-
-        public void ChooseStackQueue()
+        public static ISweepstakesManager CreateManager(string managerType)
         {
-            Console.WriteLine("Would you like to use a stack or a queue for your sweepstakes?");
-            Console.WriteLine("Please enter '1' for stack, or '2' for queue");
-            switch (Console.ReadLine())
+            ISweepstakesManager manager = null;
+            switch (managerType)
             {
-                case "1":
+                case "stack":
                     Console.WriteLine("You have chosen to stack.");
-                    stackManager.InsertSweepstakes();
+                    manager = new SweepstakesStackManager();
                     break;
-                case "2":
+                case "queue":
                     Console.WriteLine("You have chosen to queue.");
-                    queueManager.InsertSweepstakes();
+                    manager = new SweepstakesQueueManager();
                     break;
                 default:
-                    ChooseStackQueue();
+                    Console.WriteLine("Please enter 1 for stack or 2 for queue.");
+                    CreateManager(managerType);
                     break;
             }
+            return manager;
         }
     }
 }

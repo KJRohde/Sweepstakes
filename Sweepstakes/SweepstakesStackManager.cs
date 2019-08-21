@@ -14,9 +14,10 @@ namespace Sweepstakes
         {
             sweepstakeStack.Push(sweepstakes);
         }
-        Sweepstakes GetSweepstakes()
+        public Sweepstakes GetSweepstakes()
         {
-
+            Console.WriteLine("Got it");
+            return sweepstakeStack.Pop();
         }
     }
 }
