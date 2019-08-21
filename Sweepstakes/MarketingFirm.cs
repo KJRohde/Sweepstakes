@@ -22,11 +22,10 @@ namespace Sweepstakes
         }
         public void RunSweepstakes()
         {
-            managerType = GetManagerType();
-            AddManager(managerType);
             GetNumberOfSweepstakes();
             while (sweepstakeCounter <= numberOfSweepstakes)
             {
+                Sweepstakes sweepstakes = new Sweepstakes(this.sweepstakes.NameSweepstakes());
                 sweepstakes.RegisterContestant(sweepstakes.contestant);
                 AskToAdd();
                 manager.InsertSweepstakes(sweepstakes);

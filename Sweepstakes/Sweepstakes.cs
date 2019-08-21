@@ -12,10 +12,12 @@ namespace Sweepstakes
         public Dictionary<int, string> contestants = new Dictionary<int, string>();
         public int winner;
         public Contestant contestant;
+        public string name;
 
         //construct
         public Sweepstakes(string name)
         {
+            this.name = NameSweepstakes();
         }
         //methods
         public void RegisterContestant(Contestant contestant)
@@ -40,6 +42,12 @@ namespace Sweepstakes
                     Console.WriteLine($"Contestant ID: {contestant.Key} Contestant Name: {contestant.Value} Contestant Email: {contestants[winner]}\nIs the winner.");
                     Console.ReadLine();
             }
+        }
+        public string NameSweepstakes()
+        {
+            Console.WriteLine("What would you like to name this sweepstakes?");
+            name = Console.ReadLine();
+            return name;
         }
     }
 }

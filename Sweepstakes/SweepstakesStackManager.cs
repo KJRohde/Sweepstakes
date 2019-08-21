@@ -16,7 +16,6 @@ namespace Sweepstakes
         }
         public Sweepstakes GetSweepstakes()
         {
-            Console.WriteLine("Got it");
             return sweepstakeStack.Pop();
         }
     }
