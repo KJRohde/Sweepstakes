@@ -8,8 +8,12 @@ namespace Sweepstakes
 {
     class SweepstakeManagerFactory
     {
-        public static ISweepstakesManager CreateManager(string managerType)
+        //parameter for function
+        public static ISweepstakesManager CreateManager()
         {
+            Console.WriteLine("Would you like to use a stack or a queue for your sweepstakes?");
+            Console.WriteLine("Please enter 'stack', or 'queue'");
+            string managerType = Console.ReadLine();
             ISweepstakesManager manager = null;
             switch (managerType)
             {
@@ -23,7 +27,7 @@ namespace Sweepstakes
                     break;
                 default:
                     Console.WriteLine("Please enter 1 for stack or 2 for queue.");
-                    CreateManager(managerType);
+                    CreateManager();
                     break;
             }
             return manager;
