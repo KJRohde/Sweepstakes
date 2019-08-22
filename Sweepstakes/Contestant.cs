@@ -14,13 +14,7 @@ namespace Sweepstakes
         public string emailAddress;
         public int idNumber;
         //Construct
-        public Contestant(string firstName, string lastName, string emailAddress, int idNumber)
-        {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.emailAddress = emailAddress;
-            this.idNumber = idNumber;
-        }
+
         //methods
     }
 }

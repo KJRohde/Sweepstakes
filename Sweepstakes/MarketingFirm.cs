@@ -8,10 +8,11 @@ namespace Sweepstakes
 {
     public class MarketingFirm
     {
-        public Sweepstakes sweepstakes;
+        // public Sweepstakes sweepstakes;
         public int numberOfSweepstakes;
         ISweepstakesManager manager;
         public int sweepstakeCounter;
+        public int allowedContestants;
 
 
         public MarketingFirm(ISweepstakesManager manager)
@@ -22,39 +23,31 @@ namespace Sweepstakes
         public void RunSweepstakes()
         {
             GetNumberOfSweepstakes();
-            while (sweepstakeCounter <= numberOfSweepstakes)
+            for (int i = 0; i < numberOfSweepstakes; i++)
             {
-                Sweepstakes sweepstakes = new Sweepstakes(this.sweepstakes.NameSweepstakes());
-                sweepstakes.RegisterContestant(sweepstakes.contestant);
+                Console.Clear();
+                Sweepstakes sweepstakes = new Sweepstakes(UserInterface.NameSweepstakes());
                 AskToAdd();
+                for (int j = 0; j < allowedContestants; j++)
+                {
+                    sweepstakes.RegisterContestant(new Contestant()) ;
+                }
                 manager.InsertSweepstakes(sweepstakes);
-                sweepstakeCounter++;
             }
-            while (numberOfSweepstakes > 0)
+        }
+        public void FinishSweepstakes()
+        {
+            for (int i = numberOfSweepstakes; i > 0; i--)
             {
-                manager.GetSweepstakes();
-                sweepstakes.ChooseWinner();
+                Sweepstakes sweepstakes = manager.GetSweepstakes();
                 sweepstakes.PrintContestantInfo();
                 numberOfSweepstakes--;
             }
         }
         public void AskToAdd()
         {
-            Console.WriteLine("Would you like to register more contestants? Enter yes or no");
-            switch (Console.ReadLine())
-            {
-                case "yes":
-                    sweepstakes.RegisterContestant(sweepstakes.contestant);
-                    AskToAdd();
-                    break;
-                case "no":
-                    Console.WriteLine("This sweepstakes now has all contestants registered.");
-                    Console.ReadLine();
-                    break;
-                default:
-                    AskToAdd();
-                    break;
-            }
+            Console.WriteLine("How many contestants will you allow in this sweepstakes?");
+            allowedContestants = int.Parse(Console.ReadLine());
         }
         public int GetNumberOfSweepstakes()
         {

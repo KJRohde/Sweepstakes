@@ -13,6 +13,7 @@ namespace Sweepstakes
             MarketingFirm firm = new MarketingFirm(SweepstakeManagerFactory.CreateManager());
 
             firm.RunSweepstakes();
+            firm.FinishSweepstakes();
         }
     }
 }

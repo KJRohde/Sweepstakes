@@ -9,45 +9,42 @@ namespace Sweepstakes
     public class Sweepstakes
     {
         //memebr variables
-        public Dictionary<int, string> contestants = new Dictionary<int, string>();
+        public Dictionary<int, Contestant> contestants = new Dictionary<int, Contestant>();
         public int winner;
-        public Contestant contestant;
         public string name;
 
         //construct
         public Sweepstakes(string name)
         {
-            this.name = NameSweepstakes();
+            this.name = name;
         }
         //methods
         public void RegisterContestant(Contestant contestant)
         {
-            UserInterface.GetContestantInformation(contestant);
+            Console.Clear();
+            contestant = UserInterface.GetContestantInformation(contestant);
             contestant.idNumber = (contestants.Count + 1);
             Console.WriteLine("Your contest ID number is " + contestant.idNumber + ".");
-            contestants.Add(contestant.idNumber, "" + contestant.firstName + " " + contestant.lastName + "");
-
-
+            Console.ReadLine();
+            contestants.Add(contestant.idNumber, contestant);
         }
-        public int ChooseWinner()
+        public int GetWinner()
         {
             winner = UserInterface.GenerateRandomNumber(1, contestants.Count);
             return winner;
         }
         public void PrintContestantInfo()
         {
-            foreach (KeyValuePair<int, string> contestant in contestants)
+            GetWinner();
+            foreach (KeyValuePair<int, Contestant> contestant in contestants)
             {
                 if (contestant.Key == winner)
-                    Console.WriteLine($"Contestant ID: {contestant.Key} Contestant Name: {contestant.Value} Contestant Email: {contestants[winner]}\nIs the winner.");
+                {
+                    Console.WriteLine("The winner of " + name + " is:");
+                    UserInterface.PrintContestant(contestant.Value);
                     Console.ReadLine();
+                }
             }
-        }
-        public string NameSweepstakes()
-        {
-            Console.WriteLine("What would you like to name this sweepstakes?");
-            name = Console.ReadLine();
-            return name;
         }
     }
 }
